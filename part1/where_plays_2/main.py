@@ -35,7 +35,8 @@ with sqlite3.connect("../netflix.db") as con:
     sqlite_query = """
     SELECT title, rating
     FROM netflix
-    WHERE 'cast' = "%Joaquin Phoenix%"
+    WHERE type = 'Movie'  
+    AND "cast" LIKE '%Joaquin Phoenix%'
     """
     result = cur.execute(sqlite_query)
 
