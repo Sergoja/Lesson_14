@@ -27,12 +27,16 @@ import sqlite3
 with sqlite3.connect("../netflix.db") as con:
     cur = con.cursor()
     sqlite_query = """
-    SELECT title, rating
+    SELECT title, MAX(duration)
     FROM netflix
     WHERE type = 'Movie'  
-    AND "cast" LIKE '%Joaquin Phoenix%'
+    AND release_year = '2019'
     """
     result = cur.execute(sqlite_query)
+    result = cur.fetchall()
+    movie_title = result[0][0]
+    duration = result[0][1]
+    result = (f'{movie_title} — {duration} минут')
 
 if __name__ == '__main__':
     print(result)
